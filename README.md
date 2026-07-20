@@ -81,21 +81,6 @@ Satellite-on-a-Chip-Project
 
 ---
 
-## Project Status
-
-| Task | Status |
-|------|--------|
-| Repository Setup | ✅ Complete |
-| Documentation | 🔄 In Progress |
-| FPGA Selection | ✅ Complete |
-| Architecture Design | 🔄 In Progress |
-| RTL Development | ⏳ Pending |
-| Testbench Development | ⏳ Pending |
-| System Integration | ⏳ Pending |
-| Simulation | ⏳ Pending |
-| Final Validation | ⏳ Pending |
-
----
 
 ## References
 
