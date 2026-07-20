@@ -1,80 +1,143 @@
-
 # Satellite-on-a-Chip Architecture
 
 ## Overview
 
-The proposed Satellite-on-a-Chip integrates all digital satellite subsystems inside a single FPGA.
+The proposed Satellite-on-a-Chip (SAToC) architecture integrates the primary digital subsystems of a satellite into a single FPGA platform.
 
-The architecture follows a modular design philosophy allowing each subsystem to communicate through a common system bus.
+The design is based on a modular architecture centered around a RISC-V processor that communicates with all satellite subsystems through a common system bus. External analog and RF hardware such as antennas, RF amplifiers, filters, and power conversion circuits remain outside the FPGA.
+
+---
+
+# Design Objectives
+
+The proposed architecture is designed to achieve the following objectives:
+
+- Integrate multiple satellite subsystems into one FPGA.
+- Reduce PCB complexity.
+- Improve system reliability.
+- Support modular hardware development.
+- Enable future expansion.
+- Simplify testing and validation.
+
+---
+
+# Overall Architecture
+
+```
+                       +-------------------------+
+                       |     Ground Station      |
+                       +-----------+-------------+
+                                   |
+                              Telecommand
+                                   |
+                        Telemetry Data
+                                   |
+                      +------------v------------+
+                      |        TT&C Module      |
+                      +------------+------------+
+                                   |
+                                   |
+        +--------------------------+--------------------------+
+        |                                                     |
++-------v--------+                              +-------------v-------------+
+|      OBDH      |<-------- System Bus -------->|      RISC-V Processor     |
++-------+--------+                              +-------------+-------------+
+        |                                                     |
+        |                                                     |
++-------v--------+                              +-------------v-------------+
+|      Memory    |                              |            EPS            |
++----------------+                              +-------------+-------------+
+                                                              |
+                                                   Power Status / Sensors
+                                                              |
+                                               External Battery & Solar Panels
+
+```
 
 ---
 
 # Major Components
 
-## RISC-V Processor
+## 1. RISC-V Processor
 
-Responsible for
+The RISC-V processor serves as the central controller of the Satellite-on-a-Chip.
 
-- System control
+Responsibilities include:
+
 - Task scheduling
-- Data processing
-- Communication management
+- Telecommand execution
+- Telemetry management
+- Memory access
+- Communication control
+- System monitoring
+
+Recommended Core:
+
+- NEORV32
 
 ---
 
-## OBDH
+## 2. OBDH (On-Board Data Handling)
 
-Responsibilities
+The OBDH subsystem is responsible for:
 
-- Data collection
+- Housekeeping data
+- Payload data management
 - Memory management
-- Payload management
-- Housekeeping
+- Sensor data collection
+- Data routing
 
 ---
 
-## TT&C
+## 3. TT&C (Telemetry, Tracking and Command)
 
-Responsible for
+The TT&C subsystem performs:
 
+- Telecommand reception
+- Packet decoding
 - Telemetry packet generation
-- Telecommand decoding
-- Ground communication
+- Communication with ground station
 
 ---
 
-## EPS
+## 4. EPS (Electrical Power System)
 
-Responsible for
+The EPS subsystem monitors:
 
-- Battery monitoring
-- Voltage monitoring
-- Current monitoring
-- Power status
-
----
-
-## Memory
-
-Stores
-
-- Telemetry
-- Commands
-- Configuration
-- Processor instructions
+- Battery voltage
+- Battery current
+- Solar panel voltage
+- System power status
+- Fault detection
 
 ---
 
-## Communication Interfaces
+## 5. Memory
+
+The memory subsystem stores:
+
+- Program code
+- Telemetry packets
+- Telecommands
+- Configuration data
+- Housekeeping information
+
+---
+
+## 6. Communication Interfaces
+
+The proposed architecture supports:
 
 - UART
 - SPI
-- I2C
+- I²C
 - GPIO
 - CAN
-- RS232
-- RS485
+- RS-232
+- RS-485
 - SpaceWire
+
+These interfaces allow communication with external sensors, payloads, and satellite subsystems.
 
 ---
 
@@ -88,7 +151,7 @@ TT&C
 
 ↓
 
-RISC-V
+RISC-V Processor
 
 ↓
 
@@ -96,23 +159,40 @@ OBDH
 
 ↓
 
-EPS
-
-↓
-
 Memory
 
 ↓
 
-Communication Interfaces
+EPS
+
+↓
+
+Telemetry
+
+↓
+
+Ground Station
 
 ---
 
-# Design Goals
+# Design Advantages
 
-- Modular
-- Scalable
-- Reusable
+- Modular architecture
+- Scalable design
 - FPGA optimized
-- Low power
-- Reliable
+- Low power operation
+- Easy verification
+- Future expandable
+- Suitable for CubeSat platforms
+
+---
+
+# Future Work
+
+Future development includes:
+
+- HDL implementation
+- FPGA synthesis
+- Testbench development
+- Functional simulation
+- Hardware validation
