@@ -2,18 +2,18 @@
 
 ## Project Objective
 
-The objective of this project is to design and implement a **Satellite-on-a-Chip (SAToC)** architecture capable of integrating the primary digital subsystems of a satellite into a single FPGA device.
+The objective of this project is to design and implement a **Satellite-on-a-Chip (SAToC)** architecture capable of integrating the primary digital subsystems of a satellite into a single FPGA platform.
 
 The architecture integrates:
 
 - On-Board Data Handling (OBDH)
 - Telemetry, Tracking and Command (TT&C)
 - Electrical Power System (EPS)
-- Memory subsystem
-- Communication interfaces
-- RISC-V Processor
+- Memory Subsystem
+- Communication Interfaces
+- NEORV32 RISC-V Processor
 
-The FPGA platform must provide sufficient logic resources, memory, and I/O interfaces while maintaining compatibility with modern FPGA development tools.
+The selected FPGA platform must provide sufficient programmable logic resources, memory, communication interfaces, and compatibility with modern FPGA development tools while supporting future expansion of the system.
 
 ---
 
@@ -23,18 +23,16 @@ The FPGA platform must provide sufficient logic resources, memory, and I/O inter
 
 ### Advantages
 
-- Excellent Vivado IDE support
-- Low cost
-- Large community support
-- Supports VHDL and Verilog
-- Compatible with open-source RISC-V processors
-- Suitable for educational and research projects
 - Low power consumption
+- Excellent Vivado IDE support
+- Supports VHDL and Verilog
+- Suitable for medium-scale FPGA designs
+- Large developer community
 
 ### Disadvantages
 
-- Fewer logic cells compared to Kintex and Virtex families
-- Limited DSP resources
+- FPGA-only platform
+- Limited onboard peripherals compared to SoC-based development boards
 
 ---
 
@@ -42,77 +40,105 @@ The FPGA platform must provide sufficient logic resources, memory, and I/O inter
 
 ### Advantages
 
-- Higher logic density
-- Better DSP performance
-- Suitable for larger SoC implementations
+- High logic density
+- More DSP slices
+- Suitable for computationally intensive applications
 
 ### Disadvantages
 
 - Higher cost
-- Not necessary for this project
+- Resources exceed the requirements of this project
 
 ---
 
-## 3. Xilinx Zynq-7000
+## 3. PYNQ-Z2 (Selected)
 
 ### Advantages
 
-- ARM Cortex-A9 processor
-- FPGA programmable logic
-- High processing capability
-- Linux support
+- Based on the Xilinx Zynq-7020 SoC
+- Combines Programmable Logic (PL) with a dual-core ARM Cortex-A9 Processing System (PS)
+- Fully supported by Xilinx Vivado Design Suite
+- Supports VHDL, Verilog, and Vivado IP Integrator
+- Compatible with the NEORV32 RISC-V soft processor
+- 512 MB DDR3 memory
+- Gigabit Ethernet connectivity
+- USB OTG interface
+- HDMI Input/Output
+- Arduino and PMOD expansion headers
+- Large user community and extensive documentation
+- Suitable for embedded systems and FPGA research projects
 
 ### Disadvantages
 
-- More complex software development
-- Increased project complexity
+- More complex than FPGA-only development boards
+- Requires additional configuration when using the Processing System
 
 ---
 
-# Selected FPGA
+# Selected FPGA Platform
 
-## Xilinx Artix-7
+## PYNQ-Z2
 
-The Xilinx Artix-7 FPGA is selected because it offers the best balance between:
+The **PYNQ-Z2** development board is selected as the implementation platform for the proposed **Satellite-on-a-Chip (SAToC)** architecture.
 
-- Logic resources
-- Cost
-- Performance
-- Power consumption
-- Ease of development
+The board offers an excellent balance of programmable logic resources, embedded processing capability, memory, and communication interfaces required for integrating multiple satellite subsystems into a single platform.
 
-The Artix-7 device is fully compatible with Xilinx Vivado Design Suite and supports implementation of soft-core processors such as NEORV32.
+The Programmable Logic (PL) is used to implement the custom satellite hardware modules, including the **NEORV32 RISC-V processor**, OBDH, TT&C, EPS, memory controller, and communication peripherals. The Processing System (PS) provides opportunities for future software development, debugging, and hardware/software co-design.
+
+The PYNQ-Z2 is fully compatible with the **Xilinx Vivado Design Suite**, making it an ideal platform for FPGA development, simulation, synthesis, implementation, and hardware validation.
 
 ---
 
 # Development Environment
 
 | Tool | Purpose |
-|-------|----------|
-| Vivado | Design and Synthesis |
-| GitHub | Version Control |
-| VHDL | Hardware Description |
+|------|---------|
+| Vivado Design Suite | Design, Synthesis, Implementation |
 | Vivado Simulator | Functional Verification |
+| GitHub | Version Control |
+| VHDL | Hardware Description Language |
+| NEORV32 | RISC-V Soft Processor |
 
 ---
 
-# Expected FPGA Resources
+# Target FPGA Architecture
 
-The proposed design is expected to contain:
+The proposed implementation includes the following hardware modules:
 
-- RISC-V Processor
-- OBDH Module
-- TT&C Module
-- EPS Module
+- NEORV32 RISC-V Processor
+- On-Board Data Handling (OBDH)
+- Telemetry, Tracking and Command (TT&C)
+- Electrical Power System (EPS)
+- Memory Controller
 - UART Controller
 - SPI Controller
-- I2C Controller
-- GPIO
-- Memory Controller
+- I²C Controller
+- GPIO Interface
 - Bus Interconnect
+- Clock and Reset Management
+
+---
+
+# PYNQ-Z2 Hardware Specifications
+
+| Feature | Specification |
+|---------|---------------|
+| Development Board | PYNQ-Z2 |
+| SoC Device | Xilinx Zynq-7020 XC7Z020-1CLG400C |
+| Processing System | Dual-core ARM Cortex-A9 |
+| Programmable Logic | Artix-7 FPGA Fabric |
+| Logic Cells | ~85K |
+| Block RAM | 560 KB |
+| DSP Slices | 220 |
+| DDR3 Memory | 512 MB |
+| Ethernet | Gigabit Ethernet |
+| USB | USB OTG |
+| Expansion Interfaces | Arduino Header, PMOD Connectors |
 
 ---
 
 # Conclusion
 
-The Xilinx Artix-7 FPGA satisfies the functional and performance requirements of the proposed Satellite-on-a-Chip architecture and provides an ideal platform for development, simulation, and validation.
+The **PYNQ-Z2** development board satisfies the functional and performance requirements of the proposed **Satellite-on-a-Chip (SAToC)** architecture. Its combination of FPGA programmable logic, embedded ARM processing system, memory resources, and communication interfaces provides a scalable platform for integrating the satellite subsystems.
+
+The board's compatibility with the **Xilinx Vivado Design Suite** and support for the **NEORV32 RISC-V processor** make it an excellent choice for the design, implementation, simulation, and validation of the proposed FPGA-based satellite system.
