@@ -1,24 +1,16 @@
 # Testbench
 
-## Overview
+This folder contains module-level VHDL testbenches developed for the Satellite-on-a-Chip (SAToC) project.
 
-This folder is reserved for VHDL testbenches used to verify the functionality of the SAToC hardware modules.
+## Implemented Testbenches
 
-## Current Status
+- eps_tb.vhd
+- obdh_tb.vhd
+- ttc_tb.vhd
+- memory_controller_tb.vhd
 
-The primary focus of this project was FPGA implementation and hardware validation using AMD Vivado Design Suite 2025.2.
+## Purpose
 
-No standalone VHDL testbenches were developed during the current implementation.
+These testbenches provide basic functional verification of the individual hardware modules.
 
-## Planned Testbenches
-
-Future work will include testbenches for:
-
-- NEORV32 Processor Interface
-- SAToC AXI Peripheral
-- OBDH Module
-- TT&C Module
-- EPS Module
-- Memory Controller
-
-These testbenches will be used for functional verification prior to FPGA deployment.
+A complete system-level testbench for the integrated SAToC architecture is planned as future work.
