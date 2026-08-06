@@ -1,0 +1,32 @@
+# Vivado Generated Files
+.cache/
+.hw/
+.ip_user_files/
+.sim/
+.runs/
+.gen/
+.srcs/
+
+# Log Files
+*.log
+*.jou
+*.str
+
+# Temporary Files
+*.tmp
+
+# Backup Files
+*.bak
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+
+# Bitstream backups
+*.backup
