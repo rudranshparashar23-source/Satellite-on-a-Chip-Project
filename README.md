@@ -9,7 +9,7 @@
 ![Language](https://img.shields.io/badge/Language-VHDL-orange)
 ![Processor](https://img.shields.io/badge/Processor-NEORV32-red)
 ![Tool](https://img.shields.io/badge/Tool-Vivado%202025.2-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+
 
 ---
 
