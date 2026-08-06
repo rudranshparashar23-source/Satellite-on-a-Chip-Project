@@ -2,24 +2,28 @@
 
 ## Overview
 
-This folder contains the simulation environment for the Satellite-on-a-Chip (SAToC) project.
-
-## Simulation Components
-
-- Testbench files
-- Functional verification
-- RTL simulation
-- Module-level validation
+This folder is reserved for simulation files and functional verification of the Satellite-on-a-Chip (SAToC) hardware modules.
 
 ## Current Status
 
-Simulation support has been planned for the following modules:
+The primary objective of this project was the successful FPGA implementation of the SAToC architecture on the **PYNQ-Z2** development board.
 
-- OBDH
-- EPS
-- TT&C
-- Memory Controller
+The project has successfully completed:
 
-The primary focus of the current implementation was FPGA hardware integration and validation using AMD Vivado Design Suite 2025.2.
+- RTL Design
+- Block Design
+- Synthesis
+- Implementation
+- Timing Verification
+- Bitstream Generation
 
-Future work includes comprehensive functional simulation and verification of all integrated modules.
+Functional simulation and module-level verification are planned as part of future work.
+
+## Future Work
+
+Future versions of this repository will include:
+
+- RTL simulation
+- Module-level testbenches
+- Functional verification
+- Waveform analysis
