@@ -418,8 +418,6 @@ The SAToC hardware platform can be recreated by following the steps below.
 git clone https://github.com/<rudranshparashar23-source>/Satellite-on-a-Chip.git
 ```
 
-Replace `<your-username>` with your GitHub username.
-
 ---
 
 ## Open the Project
@@ -488,13 +486,6 @@ The following resources were used during the design and implementation of this p
 
 ---
 
-# 📄 License
-
-This project is distributed under the **MIT License**.
-
-See the `LICENSE` file for additional information.
-
----
 
 # 🙏 Acknowledgements
 
