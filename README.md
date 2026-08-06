@@ -61,6 +61,20 @@ The specific objectives are:
 
 The SAToC hardware architecture follows a modular design approach in which the **NEORV32 RISC-V soft processor** communicates with custom satellite subsystems through an **AXI4 interconnect**. The processor acts as the central controller, while dedicated hardware modules perform subsystem-specific operations.
 
+```text
+                 +----------------------+
+                 |    NEORV32 CPU       |
+                 |   (RISC-V Processor) |
+                 +----------+-----------+
+                            |
+                      AXI Interconnect
+                            |
+        +---------+---------+---------+---------+
+        |         |         |         |         |
+      OBDH      TT&C      Memory      EPS    GPIO
+```
+
+
 
 
 The major hardware components implemented in the design are:
