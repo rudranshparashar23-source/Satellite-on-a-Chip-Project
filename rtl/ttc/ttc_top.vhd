@@ -2,43 +2,40 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity ttc_top is
+entity ttc is
     Port (
-        clk          : in  STD_LOGIC;
-        reset        : in  STD_LOGIC;
-
-        tc_data      : in  STD_LOGIC_VECTOR(7 downto 0);
-
-        telemetry    : out STD_LOGIC_VECTOR(7 downto 0);
-
-        tc_valid     : out STD_LOGIC
+        clk              : in  STD_LOGIC;
+        reset            : in  STD_LOGIC;
+        command_in       : in  STD_LOGIC_VECTOR(7 downto 0);
+        command_valid    : in  STD_LOGIC;
+        telemetry_out    : out STD_LOGIC_VECTOR(7 downto 0);
+        telemetry_valid  : out STD_LOGIC
     );
-end ttc_top;
+end ttc;
 
-architecture Behavioral of ttc_top is
-
-signal telemetry_reg : STD_LOGIC_VECTOR(7 downto 0);
+architecture Behavioral of ttc is
 
 begin
 
-process(clk, reset)
+    process(clk, reset)
+    begin
 
-begin
+        if reset = '1' then
 
-    if reset='1' then
+            telemetry_out   <= (others => '0');
+            telemetry_valid <= '0';
 
-        telemetry_reg <= (others => '0');
-        tc_valid <= '0';
+        elsif rising_edge(clk) then
 
-    elsif rising_edge(clk) then
+            if command_valid = '1' then
+                telemetry_out   <= command_in;
+                telemetry_valid <= '1';
+            else
+                telemetry_valid <= '0';
+            end if;
 
-        telemetry_reg <= tc_data;
-        tc_valid <= '1';
+        end if;
 
-    end if;
-
-end process;
-
-telemetry <= telemetry_reg;
+    end process;
 
 end Behavioral;
