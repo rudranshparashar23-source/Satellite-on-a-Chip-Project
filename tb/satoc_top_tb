@@ -1,0 +1,77 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity tb_satoc_top is
+end tb_satoc_top;
+
+architecture Behavioral of tb_satoc_top is
+
+    signal clk              : STD_LOGIC := '0';
+    signal reset            : STD_LOGIC := '1';
+
+    signal sensor_data      : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal data_valid       : STD_LOGIC := '0';
+
+    signal command_in       : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal command_valid    : STD_LOGIC := '0';
+
+    signal battery_voltage  : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal battery_current  : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+
+    signal read_data        : STD_LOGIC_VECTOR(7 downto 0);
+    signal telemetry_out    : STD_LOGIC_VECTOR(7 downto 0);
+    signal telemetry_valid  : STD_LOGIC;
+    signal power_status     : STD_LOGIC;
+    signal hk_data          : STD_LOGIC_VECTOR(15 downto 0);
+
+begin
+
+    DUT : entity work.satoc_top
+        port map (
+            clk              => clk,
+            reset            => reset,
+            sensor_data      => sensor_data,
+            data_valid       => data_valid,
+            command_in       => command_in,
+            command_valid    => command_valid,
+            battery_voltage  => battery_voltage,
+            battery_current  => battery_current,
+            read_data        => read_data,
+            telemetry_out    => telemetry_out,
+            telemetry_valid  => telemetry_valid,
+            power_status     => power_status,
+            hk_data          => hk_data
+        );
+
+    clk <= not clk after 5 ns;
+
+    process
+    begin
+
+        -- Reset
+        wait for 20 ns;
+        reset <= '0';
+
+        -- OBDH Test
+        sensor_data <= x"55";
+        data_valid <= '1';
+        wait for 10 ns;
+        data_valid <= '0';
+
+        -- TT&C Test
+        command_in <= x"AA";
+        command_valid <= '1';
+        wait for 10 ns;
+        command_valid <= '0';
+
+        -- EPS Test
+        battery_voltage <= x"32"; -- 50 decimal
+        battery_current <= x"0A"; -- 10 decimal
+        wait for 20 ns;
+
+        wait;
+
+    end process;
+
+end Behavioral;
