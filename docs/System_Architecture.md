@@ -1,5 +1,18 @@
 # System Architecture
 
+```text
+                 +----------------------+
+                 |    NEORV32 CPU       |
+                 |   (RISC-V Processor) |
+                 +----------+-----------+
+                            |
+                      AXI Interconnect
+                            |
+        +---------+---------+---------+---------+
+        |         |         |         |         |
+      OBDH      TT&C      Memory      EPS    GPIO
+```
+
 ## Overview
 
 The Satellite-on-a-Chip (SAToC) architecture integrates multiple satellite digital subsystems into a unified FPGA-based hardware platform. The design follows a modular architecture centered around the NEORV32 RISC-V soft processor and uses an AXI-based interconnect for communication between processing and peripheral modules.
